@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+                "python.terminal.activateEnvironment": true,
+                "python.defaultInterpreterPath":"C:/Users/Dell/Desktop/Django Projects/django-react-auth/.env/Scripts/python.exe",
+    }
+}
