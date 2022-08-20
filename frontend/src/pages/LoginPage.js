@@ -6,7 +6,7 @@ const LoginPage = () => {
       <p>Please fill in to login</p>
         <form>
             <input type='text' name='username' placeholder='Enter Username'/>
-            <input type='password' name='password' placeholder='Enter Password'/>
+            <input type='password' name='password' placeholder='Enter Password' autoComplete='on'/>
             <input type='submit'/>
         </form>
     </div>
