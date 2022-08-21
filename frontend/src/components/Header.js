@@ -14,7 +14,7 @@ const Header = () => {
         <span> | </span>
         <Link to='/about'>About</Link>
         <span> | </span>
-        {user ? (<span onClick={logoutUser}>Logout</span>) : <Link to='/login'>Login </Link>}
+        {user ? (<Link onClick={logoutUser} to='/login'>Logout</Link>) : <Link to='/login'>Login </Link>}
 
         {user && <p> user = <b>{user.username}</b> welcome to the app</p>}
 
