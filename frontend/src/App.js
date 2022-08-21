@@ -6,6 +6,7 @@ import PrivateRoute from './utilities/PrivateRoute'
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import Header from './components/Header'
+import AboutPage from './pages/AboutPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           {/* private routes*/}
           <Route element={<PrivateRoute/>}>
             <Route element={<HomePage/>} path='/' exact/>
+            <Route element={<AboutPage/>} path='/about' />
           </Route>
 
           {/* public routes*/}

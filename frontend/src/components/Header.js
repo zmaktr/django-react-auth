@@ -8,14 +8,15 @@ const Header = () => {
   return (
 
     <div>
-
         <Link to='/'>Home</Link>
         {/* <span> | </span>
         <Link to='/login'>Login </Link> */}
         <span> | </span>
+        <Link to='/about'>About</Link>
+        <span> | </span>
         {user ? (<Link to='/logout'>Logout</Link>) : <Link to='/login'>Login </Link>}
 
-        {user && <p>{user.username} welcome to the app</p>}
+        {user && <p> user = <b>{user.username}</b> welcome to the app</p>}
 
     </div>
   )
