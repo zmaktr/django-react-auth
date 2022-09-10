@@ -6,7 +6,7 @@ const HomePage = () => {
 
   useEffect(() => {
     getNotes();
-  }, []);
+  });
 
   let { authTokens, logoutUser } = useContext(AuthContext);
 
