@@ -1,13 +1,15 @@
 import imp
+from re import T
 from django.http import JsonResponse
 from rest_framework.response import Response 
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 # customizing token claims for decode
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+
 # query serliazers/db
-from . serializers import NoteSerializer
+from . serializers import CreateUserSerializer, NoteSerializer
 from base.models import Note
 
 
@@ -29,8 +31,9 @@ class MyTokenObtainPairView(TokenObtainPairView):
 # this view/function is created to present all our endpoints
 def getRoutes(request):
     routes = [
+        #URLS
         '/api/token',
-        '/api/token/refresh'
+        '/api/token/refresh',
         '/api/notes'
     ]
     return Response(routes) # safe=False means that it can also return other than python dictionary
@@ -43,3 +46,13 @@ def getNotes(request):
     notes = user.note_set.all()
     serializer = NoteSerializer(notes, many=True)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def createUser(request):
+    serializer = CreateUserSerializer(data = request.data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    response = serializer.data
+    return Response(response)

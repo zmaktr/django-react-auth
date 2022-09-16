@@ -26,19 +26,15 @@ export const AuthProvider = ({ children }) => {
 
   let loginUser = async (e) => {
     e.preventDefault();
-    let response = await fetch(
-      "https://django-react-auth-backend.zaeemakhtar.site/api/token/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: e.target.username.value,
-          password: e.target.password.value,
-        }),
-      }
-    );
+    // console.log(e.target);
+    let response = await fetch("http://localhost:8000/api/token/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: e.target.username.value,
+        password: e.target.password.value,
+      }),
+    });
     let data = await response.json();
 
     if (response.status === 200) {
@@ -61,16 +57,13 @@ export const AuthProvider = ({ children }) => {
 
   let updateToken = async () => {
     console.log("update token called");
-    let response = await fetch(
-      "https://django-react-auth-backend.zaeemakhtar.site/api/token/refresh/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ refresh: authTokens?.refresh }),
-      }
-    );
+    let response = await fetch("http://localhost:8000/api/token/refresh/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ refresh: authTokens?.refresh }),
+    });
     let data = await response.json();
 
     if (response.status === 200) {

@@ -11,7 +11,7 @@ const HomePage = () => {
   let { authTokens, logoutUser } = useContext(AuthContext);
 
   let getNotes = async () => {
-    let response = await fetch("https://django-react-auth-backend/api/notes/", {
+    let response = await fetch("http://localhost:8000/api/notes/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -25,6 +25,7 @@ const HomePage = () => {
     } else if (response.statusText === "Unauthorized") {
       logoutUser();
     }
+    console.log(notes);
   };
   return (
     <div>

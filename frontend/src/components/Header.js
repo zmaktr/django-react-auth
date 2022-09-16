@@ -1,25 +1,48 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom'
-import AuthContext from '../context/AuthContext';
-
+import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
+import "./header.scss";
 
 const Header = () => {
-  let {user, logoutUser} =useContext(AuthContext)
+  let { user, logoutUser } = useContext(AuthContext);
   return (
+    <div className="header">
+      <NavLink exact="true" to="/">
+        Home
+      </NavLink>
+      <span> | </span>
 
-    <div>
-        <Link to='/'>Home</Link>
-        {/* <span> | </span>
-        <Link to='/login'>Login </Link> */}
-        <span> | </span>
-        <Link to='/about'>About</Link>
-        <span> | </span>
-        {user ? (<Link onClick={logoutUser} to='/login'>Logout</Link>) : <Link to='/login'>Login </Link>}
+      <NavLink exact="true" to="/about">
+        About
+      </NavLink>
+      <span> | </span>
 
-        {user && <p> user = <b>{user.username}</b> welcome to the app</p>}
+      {user ? null : (
+        <>
+          <NavLink exact="true" to="/signup">
+            Signup
+          </NavLink>{" "}
+          <span> | </span>{" "}
+        </>
+      )}
 
+      {user ? (
+        <NavLink exact="true" onClick={logoutUser} to="/login">
+          Logout
+        </NavLink>
+      ) : (
+        <NavLink exact="true" to="/login">
+          Login{" "}
+        </NavLink>
+      )}
+
+      {user && (
+        <p>
+          user = <b>{user.username}</b> welcome to the app
+        </p>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

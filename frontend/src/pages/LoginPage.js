@@ -5,20 +5,16 @@ const LoginPage = () => {
   let { loginUser } = useContext(AuthContext);
   return (
     <div>
-      <p>Please fill in to login</p>
+      <p>
+        Please fill in to <b>login</b> a existing user
+      </p>
       <form onSubmit={loginUser}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Enter Username"
-          value="admin"
-        />
+        <input type="text" name="username" placeholder="Enter Username" />
         <input
           type="password"
           name="password"
           placeholder="Enter Password"
           autoComplete="on"
-          value="admin"
         />
         <input type="submit" />
       </form>
