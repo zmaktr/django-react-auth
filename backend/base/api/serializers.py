@@ -12,7 +12,9 @@ class NoteSerializer(ModelSerializer):
 class CreateUserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'  # 'username' & 'password'
+        fields = ["username", "password"]  # 'username' & 'password'
     
-    # def create(self, validated_data):
-    #     return User.objects.create_user(**validated_data)
+    def create(self, validated_data):
+        # used for deserialization
+        # return an object with validated data including hashed password
+        return User.objects.create_user(**validated_data)

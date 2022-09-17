@@ -8,6 +8,8 @@ export default AuthContext;
 
 // Create a provider
 export const AuthProvider = ({ children }) => {
+  let [loggedIn, setLoggedIn] = useState(false);
+
   let [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
       ? JSON.parse(localStorage.getItem("authTokens"))
@@ -42,6 +44,7 @@ export const AuthProvider = ({ children }) => {
       setUser(jwt_decode(data.access));
       localStorage.setItem("authTokens", JSON.stringify(data));
       history("/");
+      setLoggedIn(true);
       console.log("sucessAuthContent promise resolve");
     } else {
       alert("Something went wong | incorrect credentials");
@@ -53,6 +56,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     localStorage.removeItem("authTokens");
     history("/login");
+    setLoggedIn(false);
   };
 
   let updateToken = async () => {
@@ -78,11 +82,52 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    let response = await fetch("http://localhost:8000/api/create-user/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: e.target.username.value,
+        password: e.target.password.value,
+      }),
+    });
+    let data = await response.json();
+    if (response.status === 200) {
+      loginUser(e);
+    } else alert(data.username + " Please try another username.");
+  };
+
+  ///////
+  const getNotes = async () => {
+    let response = await fetch("http://localhost:8000/api/notes/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(authTokens.access),
+      },
+    });
+    let data = await response.json();
+
+    if (response.status === 200) {
+      setNotes(data);
+    } else if (response.statusText === "Unauthorized") {
+      logoutUser();
+    }
+    console.log(data);
+  };
+  /////
+  let [notes, setNotes] = useState([]);
+
   let contextData = {
     user: user,
     authTokens: authTokens,
     loginUser: loginUser,
     logoutUser: logoutUser,
+    handleSignup: handleSignup,
+    notes: notes,
+    getNotes: getNotes,
+    loggedIn: loggedIn,
   };
 
   useEffect(() => {

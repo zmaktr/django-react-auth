@@ -32,13 +32,14 @@ class MyTokenObtainPairView(TokenObtainPairView):
 def getRoutes(request):
     routes = [
         #URLS
-        '/api/token',
-        '/api/token/refresh',
-        '/api/notes'
+        '/api/create-user/',
+        '/api/token/',
+        '/api/token/refresh/',
+        '/api/notes/'
     ]
     return Response(routes) # safe=False means that it can also return other than python dictionary
 
-# get endpoints data from db
+# get notes data from db 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getNotes(request):
@@ -47,12 +48,13 @@ def getNotes(request):
     serializer = NoteSerializer(notes, many=True)
     return Response(serializer.data)
 
-
+# create new user
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def createUser(request):
     serializer = CreateUserSerializer(data = request.data)
     serializer.is_valid(raise_exception=True)
+    # saves the user to the database
     serializer.save()
     response = serializer.data
     return Response(response)

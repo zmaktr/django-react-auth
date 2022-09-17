@@ -1,36 +1,26 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 
 const HomePage = () => {
-  let [notes, setNotes] = useState([]);
+  let { loggedIn, getNotes, notes } = useContext(AuthContext);
 
   useEffect(() => {
     getNotes();
-  });
+  }, [loggedIn]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  let { authTokens, logoutUser } = useContext(AuthContext);
-
-  let getNotes = async () => {
-    let response = await fetch("http://localhost:8000/api/notes/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + String(authTokens.access),
-      },
-    });
-    let data = await response.json();
-
-    if (response.status === 200) {
-      setNotes(data);
-    } else if (response.statusText === "Unauthorized") {
-      logoutUser();
-    }
-    console.log(notes);
+  const handleNoteSubmit = () => {
+    console.log("new note");
   };
+
   return (
     <div>
       <p>You are inside the homePage</p>
       <p>Only Logged in users can access this</p>
+      <form onSubmit={handleNoteSubmit}>
+        <textarea type="textarea" placeholder="Add note"></textarea>
+        <br></br>
+        <input type="submit" />
+      </form>
       <ul>
         {notes.map((note) => (
           <li key={note.id}>{note.body}</li>

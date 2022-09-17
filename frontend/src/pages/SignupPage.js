@@ -1,20 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import AuthContext from "../context/AuthContext";
 
 function SignupPage() {
-  const handleSignup = async (e) => {
-    e.preventDefault();
-    console.log(e.target);
-    let response = await fetch("http://localhost:8000/api/create-user/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: e.target.username.value,
-        password: e.target.password.value,
-      }),
-    });
-    let data = await response.json();
-    console.log(data);
-  };
+  let { handleSignup } = useContext(AuthContext);
 
   return (
     <div>

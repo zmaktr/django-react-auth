@@ -3,10 +3,11 @@ import AuthContext from "../context/AuthContext";
 
 const LoginPage = () => {
   let { loginUser } = useContext(AuthContext);
+
   return (
     <div>
       <p>
-        Please fill in to <b>login</b> a existing user
+        Please fill in to <b>login</b> an existing user
       </p>
       <form onSubmit={loginUser}>
         <input type="text" name="username" placeholder="Enter Username" />
