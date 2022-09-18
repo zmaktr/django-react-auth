@@ -16,6 +16,9 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     # query db
     path('notes/', views.getNotes),
+    path('create-notes/', views.createNotes, name='create_notes'),
+    path('delete-notes/<int:id>/', views.deleteNotes, name='delete_notes'),
+    path('update-notes/<int:id>/', views.updateNotes, name='update_notes'),
     # create user
     path('create-user/', views.createUser, name='create_user')
 ]

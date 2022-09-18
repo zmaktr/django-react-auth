@@ -8,6 +8,14 @@ class NoteSerializer(ModelSerializer):
     class Meta:
         model = Note
         fields = '__all__' # 'user' & 'body'
+        
+    def create(self, validated_data):
+        return Note.objects.create(**validated_data)
+    
+    def update(self, instance, validated_data):
+        instance.body = validated_data.get('body', instance.body)
+        instance.save()
+        return instance
 
 class CreateUserSerializer(ModelSerializer):
     class Meta:
