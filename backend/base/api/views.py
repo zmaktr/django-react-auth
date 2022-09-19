@@ -36,8 +36,9 @@ def getRoutes(request):
         '/api/token/',
         '/api/token/refresh/',
         '/api/notes/',
+        '/api/create-notes/',
+        '/api/update-notes/<int:id>/'
         '/api/delete-notes/<int:id>',
-        '/api/create-notes/'
     ]
     return Response(routes) # safe=False means that it can also return other than python dictionary
 

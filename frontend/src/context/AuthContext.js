@@ -98,7 +98,6 @@ export const AuthProvider = ({ children }) => {
     } else alert(data.username + " Please try another username.");
   };
 
-  ///////
   const getNotes = async () => {
     let response = await fetch("http://localhost:8000/api/notes/", {
       method: "GET",
@@ -116,7 +115,75 @@ export const AuthProvider = ({ children }) => {
     }
     console.log(data);
   };
-  /////
+
+  const handleNoteSubmit = async (e) => {
+    e.preventDefault();
+    let response = await fetch("http://localhost:8000/api/create-notes/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(authTokens.access),
+      },
+      body: JSON.stringify({
+        body: e.target.body.value,
+      }),
+    });
+
+    let data = await response.json();
+    if (response.status === 200) {
+      getNotes();
+    } else alert(data.body);
+    console.log(data);
+  };
+
+  const handleNoteOperation = async (e, note) => {
+    e.preventDefault();
+    if (e.nativeEvent.submitter.name === "delete") {
+      let response = await fetch(
+        `http://localhost:8000/api/delete-notes/${note.id}/`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + String(authTokens.access),
+          },
+        }
+      );
+      let data = await response.json();
+      if (response.status === 200) {
+        getNotes();
+        console.log(data);
+      } else {
+        alert("There is some problem with your request");
+        console.log(note.id);
+      }
+    }
+
+    if (e.nativeEvent.submitter.name === "update") {
+      let response = await fetch(
+        `http://localhost:8000/api/update-notes/${note.id}/`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + String(authTokens.access),
+          },
+          body: JSON.stringify({
+            body: e.target.note.value,
+          }),
+        }
+      );
+      let data = await response.json();
+      if (response.status === 200) {
+        getNotes();
+        console.log("PATCH request success");
+      } else {
+        getNotes();
+        alert("PUT request failed", data);
+      }
+    }
+  };
+
   let [notes, setNotes] = useState([]);
 
   let contextData = {
@@ -128,6 +195,8 @@ export const AuthProvider = ({ children }) => {
     notes: notes,
     getNotes: getNotes,
     loggedIn: loggedIn,
+    handleNoteSubmit: handleNoteSubmit,
+    handleNoteOperation: handleNoteOperation,
   };
 
   useEffect(() => {
