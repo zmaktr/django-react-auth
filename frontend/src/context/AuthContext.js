@@ -29,14 +29,17 @@ export const AuthProvider = ({ children }) => {
   let loginUser = async (e) => {
     e.preventDefault();
     // console.log(e.target);
-    let response = await fetch("http://localhost:8000/api/token/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: e.target.username.value,
-        password: e.target.password.value,
-      }),
-    });
+    let response = await fetch(
+      "https://django-react-auth-backend.zaeemakhtar.site/api/token/",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: e.target.username.value,
+          password: e.target.password.value,
+        }),
+      }
+    );
     let data = await response.json();
 
     if (response.status === 200) {
@@ -61,13 +64,16 @@ export const AuthProvider = ({ children }) => {
 
   let updateToken = async () => {
     console.log("update token called");
-    let response = await fetch("http://localhost:8000/api/token/refresh/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ refresh: authTokens?.refresh }),
-    });
+    let response = await fetch(
+      "https://django-react-auth-backend.zaeemakhtar.site/api/token/refresh/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ refresh: authTokens?.refresh }),
+      }
+    );
     let data = await response.json();
 
     if (response.status === 200) {
@@ -84,14 +90,17 @@ export const AuthProvider = ({ children }) => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    let response = await fetch("http://localhost:8000/api/create-user/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: e.target.username.value,
-        password: e.target.password.value,
-      }),
-    });
+    let response = await fetch(
+      "https://django-react-auth-backend.zaeemakhtar.site/api/create-user/",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: e.target.username.value,
+          password: e.target.password.value,
+        }),
+      }
+    );
     let data = await response.json();
     if (response.status === 200) {
       loginUser(e);
@@ -99,13 +108,16 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getNotes = async () => {
-    let response = await fetch("http://localhost:8000/api/notes/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + String(authTokens.access),
-      },
-    });
+    let response = await fetch(
+      "https://django-react-auth-backend.zaeemakhtar.site/api/notes/",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+      }
+    );
     let data = await response.json();
 
     if (response.status === 200) {
@@ -118,16 +130,19 @@ export const AuthProvider = ({ children }) => {
 
   const handleNoteSubmit = async (e) => {
     e.preventDefault();
-    let response = await fetch("http://localhost:8000/api/create-notes/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + String(authTokens.access),
-      },
-      body: JSON.stringify({
-        body: e.target.body.value,
-      }),
-    });
+    let response = await fetch(
+      "https://django-react-auth-backend.zaeemakhtar.site/api/create-notes/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+        body: JSON.stringify({
+          body: e.target.body.value,
+        }),
+      }
+    );
 
     let data = await response.json();
     if (response.status === 200) {
@@ -140,7 +155,7 @@ export const AuthProvider = ({ children }) => {
     e.preventDefault();
     if (e.nativeEvent.submitter.name === "delete") {
       let response = await fetch(
-        `http://localhost:8000/api/delete-notes/${note.id}/`,
+        `https://django-react-auth-backend.zaeemakhtar.site/api/delete-notes/${note.id}/`,
         {
           method: "DELETE",
           headers: {
@@ -161,7 +176,7 @@ export const AuthProvider = ({ children }) => {
 
     if (e.nativeEvent.submitter.name === "update") {
       let response = await fetch(
-        `http://localhost:8000/api/update-notes/${note.id}/`,
+        `https://django-react-auth-backend.zaeemakhtar.site/api/update-notes/${note.id}/`,
         {
           method: "PATCH",
           headers: {
