@@ -6,9 +6,13 @@ You can make notes using this API to store ideas from your lectures or reading. 
 
 Frontend is developed using ReactJS library. The UI is kept simple just to demonstrate the functionality of the app.
 
+- [@Visit frontend](https://django-react-auth-frontend.zaeemakhtar.site)
+
 ## Backend (Django)
 
 Backend is developed using DRF (Django Rest Framework) using both class based views (for tokenization) and function based views (for CRUD operation on Notes).
+
+- [@Vist backend](https://django-react-auth-backend.zaeemakhtar.site)
 
 ## Badges
 
