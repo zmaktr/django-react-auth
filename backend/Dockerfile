@@ -15,4 +15,4 @@ RUN python -m pip install -r requirements.txt
 # copy all files from local machine folder to container working directory folder
 COPY . .
 # run command to start server
-CMD [ "python3","/backend/manage.py","migrate","&&","python3", "manage.py", "runserver", "0.0.0.0:8000" ]
+CMD [ "python3","manage.py","migrate","&&","python3", "manage.py", "runserver", "0.0.0.0:8000" ]
