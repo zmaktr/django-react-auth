@@ -1,18 +1,29 @@
 # install os and python
 FROM python:3.9.10
-# You will have to intall tkinter like this including time zone (this is issue with docker)
-RUN apt-get update && apt-get install tk-dev 
-# turn off python buffereing so that logs can directly be viewed in terminal
+
+# You will have to install tkinter like this including time zone (this is an issue with Docker)
+RUN apt-get update && apt-get install -y tk-dev 
+
+# Turn off Python buffering so that logs can directly be viewed in the terminal
 ENV PYTHONUNBUFFERED=1
-# create a working directory inside the container
+
+# Set the working directory inside the container
 WORKDIR /django-react-auth
-# copy requirements file into the working directory as requirements.txt
-COPY requirements.txt requirements.txt
-# upgrade pip (optional)
+
+# Copy the requirements file into the working directory
+COPY /backend/requirements.txt /django-react-auth/backend/requirements.txt
+
+# Upgrade pip (optional)
 RUN pip install --upgrade pip
-# install all dependancies
-RUN python -m pip install -r requirements.txt
-# copy all files from local machine folder to container working directory folder
+
+# Install all dependencies
+RUN pip install -r /django-react-auth/backend/requirements.txt
+
+# Copy the entire project into the container
 COPY . .
-# run command to start server
-CMD [ "python3","manage.py","migrate","&&","python3", "manage.py", "runserver", "0.0.0.0:8000" ]
+
+# Run migrations during the Docker build
+RUN python3 /django-react-auth/backend/manage.py migrate
+
+# Set the command to start the server when the container starts
+CMD ["python3", "/django-react-auth/backend/manage.py", "runserver", "0.0.0.0:8000"]
