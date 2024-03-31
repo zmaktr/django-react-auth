@@ -10,17 +10,14 @@ ENV PYTHONUNBUFFERED=1
 # Set the working directory inside the container
 WORKDIR /django-react-auth
 
-# Copy the requirements file into the working directory
-COPY backend/requirements.txt /django-react-auth/backend/requirements.txt
+# Copy the entire project into the container
+COPY . .
 
 # Upgrade pip (optional)
 RUN pip install --upgrade pip
 
 # Install all dependencies
 RUN pip install -r /django-react-auth/backend/requirements.txt
-
-# Copy the entire project into the container
-COPY . .
 
 # Run migrations during the Docker build
 RUN python3 /django-react-auth/backend/manage.py migrate
