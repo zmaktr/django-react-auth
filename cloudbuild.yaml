@@ -17,27 +17,16 @@ steps:
       - "push"
       - "gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA"
 
-  - id: "layer for sql-proxy"
-    name: "gcr.io/cloud-builders/docker"
-    entrypoint: /bin/bash
-    waitFor:
-      - "push image"
-    args:
-      - "-c"
-      - |
-        echo "FROM gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA
-        COPY --from=gcr.io/cloud-sql-connectors/cloud-sql-proxy /cloud-sql-proxy /cloudsql/cloud-sql-proxy" > Dockerfile-proxy;
-        docker build -f Dockerfile-proxy -t gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA-proxy .
-
   - id: "deploy on cloudrun"
     name: "gcr.io/cloud-builders/gcloud"
     entrypoint: "bash"
-    waitFor:
-      - "collect static"
     args:
       - "-c"
       - |
         gcloud run deploy $_SERVICE_NAME \
-          --image gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA \
+          --image gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA-proxy \  # Ensure to deploy the proxy image
           --region $_DEPLOY_REGION \
-          --platform $_PLATFORM
+          --platform $_PLATFORM \
+          --allow-unauthenticated  # Consider security implications
+options:
+  logging: CLOUD_LOGGING_ONLY
