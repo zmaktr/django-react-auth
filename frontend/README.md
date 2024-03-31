@@ -12,7 +12,7 @@ Frontend is developed using ReactJS library. The UI is kept simple just to demon
 
 Backend is developed using DRF (Django Rest Framework) using both class based views (for tokenization) and function based views (for CRUD operation on Notes).
 
-- [@Vist backend](https://django-react-auth-backend.zaeemakhtar.site)
+- [@Vist backend](https://django-react-auth-7ferodzo7q-uc.a.run.app)
 
 ## Badges
 
@@ -35,7 +35,7 @@ Backend is developed using DRF (Django Rest Framework) using both class based vi
 #### Base URL :
 
 ```https
-  https://django-react-auth-backend.zaeemakhtar.site
+  https://django-react-auth-7ferodzo7q-uc.a.run.app
 ```
 
 #### Get all endpoints

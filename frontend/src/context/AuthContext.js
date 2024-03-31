@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     e.preventDefault();
     // console.log(e.target);
     let response = await fetch(
-      "https://django-react-auth-backend.zaeemakhtar.site/api/token/",
+      "https://django-react-auth-7ferodzo7q-uc.a.run.app/api/token/",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
   let updateToken = async () => {
     console.log("update token called");
     let response = await fetch(
-      "https://django-react-auth-backend.zaeemakhtar.site/api/token/refresh/",
+      "https://django-react-auth-7ferodzo7q-uc.a.run.app/api/token/refresh/",
       {
         method: "POST",
         headers: {
@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }) => {
   const handleSignup = async (e) => {
     e.preventDefault();
     let response = await fetch(
-      "https://django-react-auth-backend.zaeemakhtar.site/api/create-user/",
+      "https://django-react-auth-7ferodzo7q-uc.a.run.app/api/create-user/",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -109,7 +109,7 @@ export const AuthProvider = ({ children }) => {
 
   const getNotes = async () => {
     let response = await fetch(
-      "https://django-react-auth-backend.zaeemakhtar.site/api/notes/",
+      "https://django-react-auth-7ferodzo7q-uc.a.run.app/api/notes/",
       {
         method: "GET",
         headers: {
@@ -131,7 +131,7 @@ export const AuthProvider = ({ children }) => {
   const handleNoteSubmit = async (e) => {
     e.preventDefault();
     let response = await fetch(
-      "https://django-react-auth-backend.zaeemakhtar.site/api/create-notes/",
+      "https://django-react-auth-7ferodzo7q-uc.a.run.app/api/create-notes/",
       {
         method: "POST",
         headers: {
@@ -155,7 +155,7 @@ export const AuthProvider = ({ children }) => {
     e.preventDefault();
     if (e.nativeEvent.submitter.name === "delete") {
       let response = await fetch(
-        `https://django-react-auth-backend.zaeemakhtar.site/api/delete-notes/${note.id}/`,
+        `https://django-react-auth-7ferodzo7q-uc.a.run.app/api/delete-notes/${note.id}/`,
         {
           method: "DELETE",
           headers: {
@@ -176,7 +176,7 @@ export const AuthProvider = ({ children }) => {
 
     if (e.nativeEvent.submitter.name === "update") {
       let response = await fetch(
-        `https://django-react-auth-backend.zaeemakhtar.site/api/update-notes/${note.id}/`,
+        `https://django-react-auth-7ferodzo7q-uc.a.run.app/api/update-notes/${note.id}/`,
         {
           method: "PATCH",
           headers: {
