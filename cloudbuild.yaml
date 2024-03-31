@@ -7,7 +7,7 @@ steps:
     args:
       - "-c"
       - |
-        docker build -t gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA -f cloud_run/Dockerfile .
+        docker build -t gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA -f Dockerfile .
 
   - id: "push image"
     name: "gcr.io/cloud-builders/docker"
