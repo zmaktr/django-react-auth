@@ -11,7 +11,7 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /django-react-auth
 
 # Copy the requirements file into the working directory
-COPY /backend/requirements.txt /django-react-auth/backend/requirements.txt
+COPY backend/requirements.txt /django-react-auth/backend/requirements.txt
 
 # Upgrade pip (optional)
 RUN pip install --upgrade pip
