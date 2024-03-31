@@ -17,10 +17,10 @@ COPY . .
 RUN pip install --upgrade pip
 
 # Install all dependencies
-RUN pip install -r /django-react-auth/backend/requirements.txt
+RUN pip install -r backend/requirements.txt
 
 # Run migrations during the Docker build
-RUN python3 /django-react-auth/backend/manage.py migrate
+RUN python3 backend/manage.py migrate
 
 # Set the command to start the server when the container starts
-CMD ["python3", "/django-react-auth/backend/manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python3", "backend/manage.py", "runserver", "0.0.0.0:8000"]
