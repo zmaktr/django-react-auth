@@ -14,10 +14,10 @@ WORKDIR /django-react-auth
 COPY . .
 
 # Upgrade pip (optional)
-RUN pip install --upgrade pip
+RUN pip3 install --upgrade pip
 
 # Install all dependencies
-RUN pip install -r backend/requirements.txt
+RUN pip3 install -r backend/requirements.txt
 
 # Run migrations during the Docker build
 RUN python3 backend/manage.py migrate
