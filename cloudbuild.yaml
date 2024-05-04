@@ -28,5 +28,20 @@ steps:
           --region $_DEPLOY_REGION \
           --platform $_PLATFORM \
           --allow-unauthenticated
+
+  - id: "run migration"
+    name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        gcloud run services update $_SERVICE_NAME \
+          --region $_DEPLOY_REGION \
+          --platform $_PLATFORM \
+          --set-env-vars DJANGO_SETTINGS_MODULE=/django-react-auth/backend/backend/settings.py \
+          --set-env-vars "PORT=8000" \
+          --set-env-vars "GAE_INSTANCE=1" \
+          --set-env-vars "MIGRATE=true" \
+          --update-env-vars "MIGRATE=true"
 options:
   logging: CLOUD_LOGGING_ONLY
