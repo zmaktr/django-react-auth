@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     e.preventDefault();
     // console.log(e.target);
     let response = await fetch(
-      "https://clean-orangutan-healthslash-3ca3ec8a.koyeb.app//api/token/",
+      "https://clean-orangutan-healthslash-3ca3ec8a.koyeb.app/api/token/",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
   let updateToken = async () => {
     console.log("update token called");
     let response = await fetch(
-      "https://clean-orangutan-healthslash-3ca3ec8a.koyeb.app//api/token/refresh/",
+      "https://clean-orangutan-healthslash-3ca3ec8a.koyeb.app/api/token/refresh/",
       {
         method: "POST",
         headers: {
@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }) => {
   const handleSignup = async (e) => {
     e.preventDefault();
     let response = await fetch(
-      "https://clean-orangutan-healthslash-3ca3ec8a.koyeb.app//api/create-user/",
+      "https://clean-orangutan-healthslash-3ca3ec8a.koyeb.app/api/create-user/",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -109,7 +109,7 @@ export const AuthProvider = ({ children }) => {
 
   const getNotes = async () => {
     let response = await fetch(
-      "https://clean-orangutan-healthslash-3ca3ec8a.koyeb.app//api/notes/",
+      "https://clean-orangutan-healthslash-3ca3ec8a.koyeb.app/api/notes/",
       {
         method: "GET",
         headers: {
@@ -131,7 +131,7 @@ export const AuthProvider = ({ children }) => {
   const handleNoteSubmit = async (e) => {
     e.preventDefault();
     let response = await fetch(
-      "https://clean-orangutan-healthslash-3ca3ec8a.koyeb.app//api/create-notes/",
+      "https://clean-orangutan-healthslash-3ca3ec8a.koyeb.app/api/create-notes/",
       {
         method: "POST",
         headers: {
@@ -155,7 +155,7 @@ export const AuthProvider = ({ children }) => {
     e.preventDefault();
     if (e.nativeEvent.submitter.name === "delete") {
       let response = await fetch(
-        `https://clean-orangutan-healthslash-3ca3ec8a.koyeb.app//api/delete-notes/${note.id}/`,
+        `https://clean-orangutan-healthslash-3ca3ec8a.koyeb.app/api/delete-notes/${note.id}/`,
         {
           method: "DELETE",
           headers: {
@@ -176,7 +176,7 @@ export const AuthProvider = ({ children }) => {
 
     if (e.nativeEvent.submitter.name === "update") {
       let response = await fetch(
-        `https://clean-orangutan-healthslash-3ca3ec8a.koyeb.app//api/update-notes/${note.id}/`,
+        `https://clean-orangutan-healthslash-3ca3ec8a.koyeb.app/api/update-notes/${note.id}/`,
         {
           method: "PATCH",
           headers: {
